@@ -1,0 +1,74 @@
+#! /bin/bash
+
+
+cheakin()
+{
+    for file in $(ls *.h)
+ 	do
+	ci $file
+	done
+    for file in $(ls *.c)
+	do
+	ci $file
+	done
+}
+
+cheakout()
+{
+	for file in $(ls *.h,v)
+	do
+	 co $file
+	done
+	for file in $(ls *c,v)
+	do
+	co $file
+	done
+}
+
+editfurther()
+{
+    read -n1 -p "Do you want to edit further(y/n)"
+	if [ $REPLY = 'y' ]
+	then
+	for file in $(ls *.h,v)
+	do
+	co -l $file
+	done
+	for file in $(ls *.c,v)
+	do
+	co -l $file
+	done
+	fi
+
+} 
+
+compile()
+{
+     if ( make )
+	then
+	read -n1 -p "make successful Do you want to insert the module y/n"
+	if [ $REPLY = 'y' ]
+	then
+	insmod ./modules/lkm.ko
+	lsmod
+	read
+	dmesg
+	read
+	cat /proc/devices
+	read
+	rmmod lkm
+	lsmod
+        read 
+	dmesg
+	read
+	cat /proc/devices
+	
+	fi
+   fi
+        editfurther	
+	exit 0
+}
+
+cheakin
+cheakout
+compile

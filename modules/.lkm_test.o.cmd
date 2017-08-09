@@ -1,0 +1,1 @@
+cmd_/home/asd/Desktop/DEVICE_DRIVER/02.DEVICE_DRIVER-C_DEV/lkm_test.o := ld -m elf_x86_64   -r -o /home/asd/Desktop/DEVICE_DRIVER/02.DEVICE_DRIVER-C_DEV/lkm_test.o /home/asd/Desktop/DEVICE_DRIVER/02.DEVICE_DRIVER-C_DEV/start.o /home/asd/Desktop/DEVICE_DRIVER/02.DEVICE_DRIVER-C_DEV/end.o 

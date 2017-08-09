@@ -1,0 +1,1 @@
+cmd_/home/asd/Desktop/DEVICE_DRIVER/02.DEVICE_DRIVER-C_DEV/lkm_test.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/asd/Desktop/DEVICE_DRIVER/02.DEVICE_DRIVER-C_DEV/lkm_test.ko /home/asd/Desktop/DEVICE_DRIVER/02.DEVICE_DRIVER-C_DEV/lkm_test.o /home/asd/Desktop/DEVICE_DRIVER/02.DEVICE_DRIVER-C_DEV/lkm_test.mod.o

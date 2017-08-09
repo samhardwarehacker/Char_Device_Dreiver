@@ -1,0 +1,266 @@
+head	1.12;
+access;
+symbols;
+locks
+	root:1.12; strict;
+comment	@ * @;
+
+
+1.12
+date	2017.07.15.09.28.17;	author root;	state Exp;
+branches;
+next	1.11;
+
+1.11
+date	2017.07.15.08.48.45;	author root;	state Exp;
+branches;
+next	1.10;
+
+1.10
+date	2017.07.15.08.45.44;	author root;	state Exp;
+branches;
+next	1.9;
+
+1.9
+date	2017.07.15.08.27.12;	author root;	state Exp;
+branches;
+next	1.8;
+
+1.8
+date	2017.07.15.08.06.37;	author root;	state Exp;
+branches;
+next	1.7;
+
+1.7
+date	2017.07.15.08.05.36;	author root;	state Exp;
+branches;
+next	1.6;
+
+1.6
+date	2017.07.15.08.02.06;	author root;	state Exp;
+branches;
+next	1.5;
+
+1.5
+date	2017.07.15.08.00.24;	author root;	state Exp;
+branches;
+next	1.4;
+
+1.4
+date	2017.07.15.07.59.54;	author root;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	2017.07.15.07.59.04;	author root;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	2017.07.15.07.57.58;	author root;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	2017.07.15.07.50.31;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.12
+log
+@*** empty log message ***
+@
+text
+@#include "header.h"
+#include "declaration.h"
+
+// ------------------------------------------------------------------
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("SOMNATH");
+//------------------------------------------------------------------
+EXPORT_SYMBOL(mymodule);
+int major_num = MAJOR_NUM;
+int minor_num = MINOR_NUM;
+int nod = NOD;
+dev_t devid = 0;
+static int __init start_func(void)
+{
+  printk(KERN_INFO "Hellow kernel\n");
+  // ------------------------------Driver registration---------------------------------------------------
+  if(!devid)
+  {
+  	if( alloc_chrdev_region(&devid,minor_num,nod,DEVICE_NAME)== -1)
+    		{
+    			printk(KERN_ERR "Device Reegistration Failed\n");
+    			goto OUT;
+    		}
+  }
+  else
+  {
+    if(register_chrdev_region(devid,minor_num,DEVICE_NAME)== -1)
+    	{
+	  	printk(KERN_ERR "Device Registration Failed");
+		goto OUT;
+	}
+  }
+  printk(KERN_INFO "Test Device Register Successfully with Major Num:-  %d \t %d\n",MAJOR(devid),MINOR(devid));
+  //------------------------- END -------------------------------------------------------------------------
+  
+  //------------------------ GETTING MEMORY TO SCULL DEVICES ----------------------------------------------
+  if(!kmalloc((sizeof(Dev)*nod),GFP_KERNEL))
+  {
+     printk(KERN_ERR "Kmalloc failed\n");
+     goto OUT;
+
+  }
+  else
+  {
+   printk(KERN_INFO "Memory Allocated successfully for scull devices\n");
+  }
+
+  return 0;
+
+OUT:
+ 	return -1;
+}
+
+//----------------------------------------------------------------------------
+//void mymodule(void)
+//{
+//  printk(KERN_INFO "%s function start\n",__func__);
+//  printk(KERN_INFO "%s function end\n",__func__);
+//}
+module_init(start_func);
+@
+
+
+1.11
+log
+@*** empty log message ***
+@
+text
+@d33 1
+a33 1
+  printk(KERN_INFO "Device Register Successfully with Major Num:-  %d \t %d\n",MAJOR(devid),MINOR(devid));
+@
+
+
+1.10
+log
+@*** empty log message ***
+@
+text
+@d8 1
+a8 1
+EXPORT_SYMBOL (mymodule);
+@
+
+
+1.9
+log
+@*** empty log message ***
+@
+text
+@d2 1
+d8 1
+a8 1
+EXPORT_SYMBOL(mymodule);
+@
+
+
+1.8
+log
+@*** empty log message ***
+@
+text
+@d54 5
+a58 5
+void mymodule(void)
+{
+  printk(KERN_INFO "%s function start\n",__func__);
+  printk(KERN_INFO "%s function end\n",__func__);
+}
+@
+
+
+1.7
+log
+@*** empty log message ***
+@
+text
+@d7 1
+a7 1
+EXPORT_SYMBOL(mymodule)
+@
+
+
+1.6
+log
+@*** empty log message ***
+@
+text
+@d7 1
+a7 1
+EXPORT_SYMBOL("mymodule")
+@
+
+
+1.5
+log
+@*** empty log message ***
+@
+text
+@d7 1
+a7 1
+__EXPORT_SYMBOL("mymodule")
+@
+
+
+1.4
+log
+@*** empty log message ***
+@
+text
+@d7 1
+a7 1
+//EXPORT_SYMBOL("mymodule")
+@
+
+
+1.3
+log
+@*** empty log message ***
+@
+text
+@d7 1
+a7 1
+EXPORT_SYMBOL("mymodule")
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@d7 1
+a7 1
+EXPORT_SYMBOL("mymodule");
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d7 1
+a7 1
+
+d53 6
+@
